@@ -1,0 +1,19 @@
+generated: '2026-08-26'
+method: searched
+source: https://seekops.com/
+note: >-
+  SeekOps documents no rate limits. There is no public API documentation to document them
+  in: the Celsius API returns HTTP 401 anonymously and the documentation host requires a
+  Microsoft Entra ID account. No RateLimit-*, X-RateLimit-* or Retry-After header was
+  observed on any unauthenticated response from celsius.seekops.com. An honest zero.
+limit_count: 0
+limits: []
+headers: []
+exhaustion_status: null
+evidence:
+- url: https://celsius.seekops.com/api/
+  status: 401
+  detail: No rate-limit headers present on the unauthenticated 401 response.
+- url: https://docs.seekops.com/
+  status: 200
+  detail: Redirects to login.microsoftonline.com; no readable documentation.

@@ -1,0 +1,71 @@
+generated: '2026-08-26'
+method: probed
+source: unauthenticated HTTP probes of celsius.seekops.com, docs.seekops.com and fastr.seekops.com
+note: >-
+  SeekOps publishes NO authentication documentation. Nothing below is derived from a
+  securityScheme or a docs page — every line is an observation from an unauthenticated
+  request. No `type: Authentication` pointer is wired at the repo level, because the
+  scoring check reads "the provider documents authentication" and SeekOps does not.
+  The per-API pointer records the observed posture for a reader, not a published one.
+surfaces:
+- name: Celsius Platform API
+  host: celsius.seekops.com
+  base: https://celsius.seekops.com/api/
+  stack: Django REST Framework (inferred from the error envelope)
+  auth_required: true
+  scheme: unknown
+  evidence:
+  - url: https://celsius.seekops.com/api/
+    status: 401
+    body: '{"detail":"Authentication credentials were not provided."}'
+    content_type: application/json
+  - url: https://celsius.seekops.com/api/users/
+    status: 401
+    body: '{"detail":"Authentication credentials were not provided."}'
+  - url: https://celsius.seekops.com/api/sites/
+    status: 401
+    body: '{"detail":"Authentication credentials were not provided."}'
+  note: >-
+    The 401 body is Django REST Framework's default NotAuthenticated detail string. No
+    WWW-Authenticate challenge names a scheme, so whether this is session, token, JWT or
+    key auth cannot be determined anonymously. The Celsius web front end is a separate
+    Next.js application served from the same host root.
+  schema_endpoints_probed:
+  - path: /api/schema/
+    status: 404
+  - path: /api/schema/swagger-ui/
+    status: 404
+  - path: /api/schema/redoc/
+    status: 404
+  - path: /api/docs/
+    status: 404
+  - path: /api/openapi.json
+    status: 404
+  - path: /api/v1/openapi.json
+    status: 404
+  schema_available: false
+- name: SeekOps documentation portal
+  host: docs.seekops.com
+  auth_required: true
+  scheme: openid-connect
+  provider: Microsoft Entra ID
+  evidence:
+  - url: https://docs.seekops.com/
+    status: 200
+    redirects_to: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+    detail: 'response_type=code+id_token, scope=openid profile email, client_id=d414ee2d-73e5-4e5b-bb16-03ef55fea597, hosted on identity.6.azurestaticapps.net'
+  note: The documentation host exists but no page is readable without a SeekOps-issued account.
+- name: FASTR real-time telemetry
+  host: fastr.seekops.com
+  auth_required: true
+  scheme: openid-connect
+  provider: Microsoft Entra ID
+  evidence:
+  - url: https://fastr.seekops.com/
+    status: 200
+    detail: Azure Static Web Apps auth wall returning the Microsoft sign-in page for every path, including nonexistent ones.
+summary:
+  publicly_documented: false
+  anonymous_schema_available: false
+  api_keys_self_serve: false
+  oauth_metadata_published: false

@@ -1,0 +1,77 @@
+generated: '2026-08-26'
+method: searched
+source: https://seekops.com/iso-9001-certification/
+note: >-
+  SeekOps publishes no machine-readable contract, so no conformance claim here is
+  derived from a specification. Everything below is either a certification the
+  company publishes on its own site, or a standard it names in marketing prose.
+  The two are graded differently and labelled as such.
+standards:
+- id: iso-9001
+  name: ISO 9001:2015 Quality Management Systems
+  conforms: true
+  evidence:
+    type: certification
+    url: https://seekops.com/iso-9001-certification/
+    status: 200
+    scope: design, testing, implementation, and manufacture of spectroscopy sensors and data solutions
+    announced: '2022-12-16'
+    note: Certification announced by SeekOps on its own site. Issuing registrar is not named on the page.
+- id: ogmp-2.0
+  name: UNEP Oil & Gas Methane Partnership 2.0 reporting framework
+  conforms: false
+  evidence:
+    type: marketing-claim
+    url: https://seekops.com/solution/
+    status: 200
+    claim: SeekOps states its measurement data supports customer reporting to OGMP 2.0 standards.
+    note: >-
+      This is a prose claim about what customers can do with SeekOps data, not a
+      declaration in a contract or a certification of SeekOps itself. Recorded as
+      not-conformant because no verifiable artifact backs it.
+- id: miq
+  name: MiQ methane certification standard
+  conforms: false
+  evidence:
+    type: marketing-claim
+    url: https://seekops.com/solution/
+    status: 200
+    claim: SeekOps states its data supports customer measurement against MiQ standards.
+    note: Prose claim only; SeekOps is a measurement vendor, not a MiQ-certified operator.
+domain_standard:
+  applicable: true
+  market: methane emissions measurement, monitoring, reporting and verification (MMRV)
+  candidate_standards:
+  - OGMP 2.0 (UNEP)
+  - MiQ
+  - EPA 40 CFR Part 98 Subpart W
+  - EU Methane Regulation (EU) 2024/1787
+  declared_in_contract: false
+  evidence: >-
+    No contract exists to declare a domain standard in. SeekOps publishes no OpenAPI,
+    AsyncAPI, GraphQL SDL or WSDL, and its Celsius API (https://celsius.seekops.com/api/)
+    returns HTTP 401 on every collection with no anonymous schema endpoint. The
+    domain_standard_conformance dimension is therefore unscoreable rather than failed —
+    reward-only, and there is nothing to reward or penalise.
+cross_cutting:
+- id: oauth2
+  conforms: false
+  evidence: 'No OAuth metadata served: /.well-known/oauth-authorization-server returned 404 on seekops.com and celsius.seekops.com.'
+- id: oidc
+  conforms: partial
+  evidence: >-
+    docs.seekops.com and fastr.seekops.com are Azure Static Web Apps that redirect to
+    login.microsoftonline.com/common/oauth2/v2.0/authorize with response_type=code+id_token
+    and scope=openid profile email — Microsoft Entra ID, an OIDC provider. This is SeekOps
+    consuming OIDC for its own staff/customer sign-in, not SeekOps offering OIDC to API clients.
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    The Celsius API error envelope observed on HTTP 401 is Django REST Framework's
+    {"detail":"..."} shape, not application/problem+json.
+- id: pagination
+  conforms: unknown
+  evidence: Not observable without authentication.
+- id: idempotency
+  conforms: unknown
+  evidence: Not observable without authentication; no published conventions documentation.

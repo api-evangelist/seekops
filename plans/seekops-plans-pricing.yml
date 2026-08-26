@@ -1,0 +1,25 @@
+generated: '2026-08-26'
+method: searched
+source: https://seekops.com/
+note: >-
+  SeekOps publishes no pricing of any kind. The site has no /pricing page, no plans page
+  and no self-serve sign-up; the only commercial call to action is "Book a survey", which
+  routes to a contact form. SeekOps sells emissions measurement as a field service —
+  surveys are scoped per facility and quoted by sales — and its software (Celsius, FASTR)
+  is bundled with that service rather than sold as a subscription. This is an enterprise
+  contact-us motion, not an undiscovered pricing page.
+plan_count: 0
+plans: []
+pricing_model: contact-sales
+self_serve_signup: false
+free_tier: false
+evidence:
+- url: https://seekops.com/
+  status: 200
+  detail: No pricing link in navigation or footer.
+- url: https://seekops.com/contact/
+  status: 200
+  detail: '"Book a survey" contact form is the sole commercial entry point.'
+- url: https://seekops.com/sitemap_index.xml
+  status: 200
+  detail: Full page sitemap enumerated; no pricing, plans, or sign-up page exists.

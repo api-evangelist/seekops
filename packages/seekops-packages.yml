@@ -1,0 +1,28 @@
+generated: '2026-08-26'
+method: searched
+source: npm, PyPI, and GitHub registry/search queries
+note: >-
+  No first-party SeekOps client library exists on any public registry. Searches for
+  "seekops" returned zero packages on npm and HTTP 404 on PyPI for every candidate name.
+  No SeekOps GitHub organization exists — the repositories GitHub search returns for the
+  term belong to unrelated parties (a Mexican dealership CRM called SEEKOP, and a DeepSeek
+  API gateway that reuses the name). Consistent with a company that ships no public API,
+  there is nothing to wrap. No `Packages` or `SDKs` pointer is wired, because there are none.
+package_count: 0
+packages: []
+registries_searched:
+- registry: npm
+  query: seekops
+  results: 0
+  status: 200
+- registry: pypi
+  queries: [seekops, seekir, celsius-seekops]
+  results: 0
+  status: 404
+- registry: github
+  query: seekops
+  results: 8
+  status: 200
+  detail: All 8 results are third parties unrelated to SeekOps Inc.
+github_org: null
+github_org_status: not-found

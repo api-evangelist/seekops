@@ -1,18 +1,58 @@
 aid: seekops
 name: SeekOps
-description: 'SeekOps is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'SeekOps Inc. is an Austin, Texas emissions-measurement company that detects
+  and quantifies methane and carbon dioxide from industrial facilities using drone-mounted
+  laser spectroscopy. Its SeekIR sensor suite applies tunable diode laser absorption
+  spectroscopy (TDLAS) originally developed at NASA''s Jet Propulsion Laboratory to
+  search for methane on Mars, hardened for terrestrial energy operations. SeekOps sells
+  measurement as a service — Leak Detection and Quantification (LDAQ) surveys flown over
+  upstream and midstream oil and gas sites, offshore platforms, landfills, biogas digesters
+  and renewable natural gas facilities — and delivers the results through two software
+  surfaces: Celsius, a cloud analytics and reconciliation-reporting dashboard, and FASTR,
+  a real-time telemetry view. Founded in 2017, the company has surveyed facilities across
+  six continents and is backed by Equinor Ventures and OGCI Climate Investments. Its
+  software is customer-only: both Celsius and FASTR sit behind authentication and SeekOps
+  publishes no public developer program, API documentation or machine-readable contract.'
 url: https://raw.githubusercontent.com/api-evangelist/seekops/refs/heads/main/apis.yml
+image: https://seekops.com/wp-content/themes/seekops-theme/assets/img/logo-nav.svg
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-26'
 modified: '2026-08-26'
 tags:
 - Company
-apis: []
+- Energy
+- Oil and Gas
+- Emissions
+- Methane
+- Environmental Monitoring
+- Sensors
+- Drones
+- Remote Sensing
+- Climate
+- ESG
+- Sustainability
+- Analytics
+- Measurement
+apis:
+- aid: seekops:celsius
+  name: SeekOps Celsius Platform API
+  description: 'The authenticated backend behind Celsius, SeekOps'' cloud analytics and
+    emissions-reconciliation dashboard. Observed as a Django REST Framework service at
+    https://celsius.seekops.com/api/ — every probed collection returns HTTP 401 with the
+    DRF envelope {"detail":"Authentication credentials were not provided."}. SeekOps
+    publishes no OpenAPI, no schema endpoint and no public documentation for it; the
+    surface is recorded here from unauthenticated probing only.'
+  humanURL: https://seekops.com/reporting_celsius/
+  baseURL: https://celsius.seekops.com/api/
+  tags:
+  - Emissions
+  - Analytics
+  - Reporting
+  properties:
+  - type: Authentication
+    url: authentication/seekops-authentication.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +60,54 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://seekops.com/
+- type: About
+  url: https://seekops.com/about/
+- type: Blog
+  url: https://seekops.com/news/
+- type: Support
+  url: https://seekops.com/contact/
+- type: FAQ
+  url: https://seekops.com/faq/
+- type: PrivacyPolicy
+  url: https://seekops.com/privacy-policy/
+- type: Compliance
+  url: https://seekops.com/iso-9001-certification/
+- type: Conformance
+  url: conformance/seekops-conformance.yml
+- type: DomainSecurity
+  url: security/seekops-domain-security.yml
+- type: LLMsTxt
+  url: llms/seekops-llms.txt
+- type: Plans
+  url: plans/seekops-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/seekops-rate-limits.yml
+x-enrichment:
+  date: '2026-08-26'
+  status: minimal
+  artifacts_added: 9
+  pass: local-v1
+x-coverage:
+  state: gated
+  reason: customer-only-docs
+  detail: >-
+    SeekOps runs a real Django REST Framework API behind its Celsius analytics product at
+    https://celsius.seekops.com/api/, but every collection answers HTTP 401 with no anonymous
+    schema endpoint, and the documentation host docs.seekops.com redirects straight to a
+    Microsoft Entra ID sign-in — so the contract is readable only by an operator who has
+    already signed a survey contract and been issued a tenant account.
+  evidence:
+    - url: https://celsius.seekops.com/api/
+      status: 401
+    - url: https://celsius.seekops.com/api/sites/
+      status: 401
+    - url: https://docs.seekops.com/
+      status: 200
+    - url: https://fastr.seekops.com/
+      status: 200
+    - url: https://celsius.seekops.com/api/schema/
+      status: 404
+    - url: https://seekops.com/llms.txt
+      status: 404
+  checked: '2026-08-26'

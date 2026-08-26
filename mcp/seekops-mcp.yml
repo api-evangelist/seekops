@@ -1,0 +1,27 @@
+generated: '2026-08-26'
+method: searched
+source: probes of seekops.com, celsius.seekops.com, fastr.seekops.com; npm and web search
+note: >-
+  SeekOps ships no MCP server, and none can be derived: there is no OpenAPI, GraphQL SDL
+  or any other machine-readable contract to project tools from. No `MCPServer` pointer is
+  wired in apis.yml — this file records that we looked and found nothing, which is the
+  honest state of SeekOps' agent reachability today.
+status: none
+tools: []
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+evidence:
+- url: https://celsius.seekops.com/.well-known/ai-plugin.json
+  status: 404
+- url: https://seekops.com/.well-known/ai-plugin.json
+  status: 404
+- registry: npm
+  query: seekops
+  results: 0
+derivable_from_openapi: false
+derivable_reason: No OpenAPI or other machine-readable contract is published by SeekOps.
