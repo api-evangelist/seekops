@@ -14,6 +14,17 @@ description: 'SeekOps Inc. is an Austin, Texas emissions-measurement company tha
   software is customer-only: both Celsius and FASTR sit behind authentication and SeekOps
   publishes no public developer program, API documentation or machine-readable contract.'
 url: https://raw.githubusercontent.com/api-evangelist/seekops/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://seekops.com/wp-content/themes/seekops-theme/assets/img/logo-nav.svg
 x-type: company
 x-source: harvest:secondary-market
